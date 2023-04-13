@@ -1,11 +1,8 @@
 public with sharing class UpdateAccountsAnnualRevenueBatch implements Database.Batchable<sObject>, Database.Stateful {
-    // public UpdateAccounts() {
 
-    // }
     public Integer recordsProcessed = 0;
     
     public Database.QueryLocator start(Database.BatchableContext bc){ 
-        //Requeter seulement les comptes qui ont au moins une commande avec le Status 'Ordered'
         return Database.getQueryLocator('SELECT Id FROM Account WHERE Id IN (SELECT AccountId FROM Order WHERE Status=\'Activated\')');
  
     }

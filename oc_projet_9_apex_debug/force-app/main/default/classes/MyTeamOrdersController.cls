@@ -1,7 +1,5 @@
 public without sharing class MyTeamOrdersController {
-    // public MyTeamOrdersController() {
 
-    // }
      public decimal SumOrders{
         get{
 			AggregateResult groupedResults = [SELECT SUM(TotalAmount) total FROM Order WHERE Status = 'Activated'];
