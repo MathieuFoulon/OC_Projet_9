@@ -11,13 +11,13 @@ public with sharing class DataFactory {
     }
 
     public static PricebookEntry createPricebookEntry (String product2Id, Double unitPrice) {
-            PricebookEntry pbe = new PricebookEntry(
+            PricebookEntry pricebookEntry = new PricebookEntry(
                 Pricebook2Id = Test.getStandardPricebookId(),
                 Product2Id = product2Id,
                 UnitPrice = unitPrice,
                 IsActive = true
             );
-            return pbe;
+            return pricebookEntry;
     }
 
     public static Contract createContract(String accountId){
@@ -34,11 +34,11 @@ public with sharing class DataFactory {
         return new Order (AccountId = accountId, Pricebook2Id = Test.getStandardPricebookId(), Status = 'Draft', EffectiveDate = Date.today()+30);
     }
 
-    public static List<Order> createOrders (String accountId, Integer ordsNumber){
+    public static List<Order> createOrders (String accountId, Integer numberOfOrders){
         List<Order> ordersList = new List<Order>();
-            for(Integer i=0; i < ordsNumber; i++) {
-                Order ord = new Order (AccountId = accountId, Pricebook2Id = Test.getStandardPricebookId(), Status = 'Draft', EffectiveDate = Date.today()+30);
-                ordersList.add(ord);
+            for(Integer i=0; i < numberOfOrders; i++) {
+                Order order = new Order (AccountId = accountId, Pricebook2Id = Test.getStandardPricebookId(), Status = 'Draft', EffectiveDate = Date.today()+30);
+                ordersList.add(order);
             }
         return ordersList;
     }
@@ -47,14 +47,14 @@ public with sharing class DataFactory {
 
     public static List<OrderItem> createOrderItems (List<Order> ordersList, Map<String, String> data) {
         List<OrderItem> orderItems = new List<OrderItem>(); 
-        for (Order ord: ordersList) {
-            OrderItem oi1 = new OrderItem(
-                OrderId = ord.Id,
+        for (Order order: ordersList) {
+            OrderItem orderItem = new OrderItem(
+                OrderId = order.Id,
                 Product2ID = data.get('Product2Id'),
                 PricebookEntryId = data.get('PricebookEntryId'),
                 Quantity=20,
                 UnitPrice = 100);
-            orderItems.add(oi1);
+            orderItems.add(orderItem);
         }
         return orderItems;
     }  

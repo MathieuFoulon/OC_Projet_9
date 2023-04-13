@@ -28,13 +28,13 @@ public with sharing class TestUpdateAccountsAnnualRevenueBatch {
         insert contractsList;
         insert ordersList;
 
-        Map<String,String> productIdAndPriceBookEntriIdMapped = new Map<String, String>{
+        Map<String,String> productIdAndPriceBookEntryIdMapped = new Map<String, String>{
             'Product2iD'=>product.id,
             'PricebookEntryId'=>pricebookEntry.id
         };
 
         
-        List<OrderItem> orderItemsList = DataFactory.createOrderItems(ordersList, productIdAndPriceBookEntriIdMapped);
+        List<OrderItem> orderItemsList = DataFactory.createOrderItems(ordersList, productIdAndPriceBookEntryIdMapped);
         
         
         insert orderItemsList;

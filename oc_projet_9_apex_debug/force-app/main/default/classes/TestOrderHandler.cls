@@ -6,16 +6,16 @@ public with sharing class TestOrderHandler {
         insert account;
         Product2 product = DataFactory.createProduct('ProductTest1');
         insert product;
-        PricebookEntry priceBookEntry = DataFactory.createPricebookEntry(product.id, 100);
-        insert priceBookEntry;
+        PricebookEntry pricebookEntry = DataFactory.createPricebookEntry(product.id, 100);
+        insert pricebookEntry;
         Contract contract = DataFactory.createContract(account.id);
         insert contract;
         List<Order> orders = DataFactory.createOrders(account.id, 1);
         insert orders;
 
-        Map<String,String> productIdAndPriceBookEntriIdMapped = new Map<String, String>{'Product2iD'=>product.id, 'PricebookEntryId'=>priceBookEntry.id};
+        Map<String,String> productIdAndPriceBookEntryIdMapped = new Map<String, String>{'Product2iD'=>product.id, 'PricebookEntryId'=>pricebookEntry.id};
 
-        List<OrderItem> orderItems = DataFactory.createOrderItems(orders, productIdAndPriceBookEntriIdMapped);
+        List<OrderItem> orderItems = DataFactory.createOrderItems(orders, productIdAndPriceBookEntryIdMapped);
 
         insert orderItems;
     }
