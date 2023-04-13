@@ -6,7 +6,7 @@ public with sharing class TestOrderHandler {
         insert account;
         Product2 product = DataFactory.createProduct('ProductTest1');
         insert product;
-        PricebookEntry priceBookEntry = DataFactory.createPricebookEntry(product.id, 1500);
+        PricebookEntry priceBookEntry = DataFactory.createPricebookEntry(product.id, 100);
         insert priceBookEntry;
         Contract contract = DataFactory.createContract(account.id);
         insert contract;

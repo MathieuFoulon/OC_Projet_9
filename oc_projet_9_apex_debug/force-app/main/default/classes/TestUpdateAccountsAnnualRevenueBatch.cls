@@ -13,7 +13,7 @@ public with sharing class TestUpdateAccountsAnnualRevenueBatch {
         Product2 product = DataFactory.createProduct('Char Tigre');
         insert product;
 
-        PricebookEntry pricebookEntry = DataFactory.createPricebookEntry(product.id, 1000);
+        PricebookEntry pricebookEntry = DataFactory.createPricebookEntry(product.id, 100);
         insert pricebookEntry;
 
         List<Contract> contractsList = new List<Contract>();
