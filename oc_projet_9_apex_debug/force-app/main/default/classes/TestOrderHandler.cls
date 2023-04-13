@@ -19,6 +19,8 @@ public with sharing class TestOrderHandler {
 
         insert orderItems;
     }
+
+    // TESTING FORMULA WORKED WELL = NOT APEX CODED IN ORDERHANDLER CLASS !!!
     @isTest
     static void processNetAmountTest(){
         Order order = new Order();
@@ -33,13 +35,23 @@ public with sharing class TestOrderHandler {
         
         Test.stopTest();
 
-        Decimal result = ([SELECT Net_Amount__c FROM Order WHERE Id=:order.Id].Net_Amount__c);
+        Decimal netAmount = ([SELECT Net_Amount__c FROM Order WHERE Id=:order.Id].Net_Amount__c);
         // 1 order * 20 unit product * 100 unit price - 200 shipment cost = 1800 € 
-        System.assertEquals(1800, result, 'Net_Amount__c is not equal 1800, need to check DataFactory and Shipment__Cost__c added');
+        System.assertEquals(1800, netAmount, 'Net_Amount__c is not equal 1800, need to check DataFactory and Shipment__Cost__c added');
         
     }
 
+    @isTest
     static void processAccountAnnualRevenueTest(){
-        
+        Order order = [SELECT Id, Status FROM Order WHERE Status = 'Draft'];
+
+        Test.startTest();
+        order.Status = 'Activated';
+        update order;
+        Test.stopTest();
+
+        Decimal annualRevenue = ([SELECT Id, AnnualRevenue FROM Account WHERE Name = 'AccountTest1'].AnnualRevenue);
+        // 1 order * 20 unit product * 100 unit price = 2000 € 
+        System.assertEquals(2000, annualRevenue, 'AnnualRevenue not equal to 2000 :' + annualRevenue );
     }
 }
