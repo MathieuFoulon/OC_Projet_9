@@ -54,7 +54,7 @@ public with sharing class TestMyTeamOrdersController {
         update updatedOrders;
         Test.stopTest();
 
-        Decimal resultToShow = mtoc.SumOrders;
+        Decimal resultToShow = mtoc.sumOrders;
         // 10 account * 2 orders * 20 unit product * 100 unit price = 40000 €
         System.assertEquals(40000, resultToShow, ' wrong expectation : resultToShow = '+ resultToShow);
 

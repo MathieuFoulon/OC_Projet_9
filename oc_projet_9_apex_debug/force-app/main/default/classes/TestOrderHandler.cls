@@ -13,7 +13,10 @@ public with sharing class TestOrderHandler {
         List<Order> orders = DataFactory.createOrders(account.id, 1);
         insert orders;
 
-        Map<String,String> productIdAndPriceBookEntryIdMapped = new Map<String, String>{'Product2iD'=>product.id, 'PricebookEntryId'=>pricebookEntry.id};
+        Map<String,String> productIdAndPriceBookEntryIdMapped = new Map<String, String>{
+            'Product2iD'=>product.id,
+            'PricebookEntryId'=>pricebookEntry.id
+        };
 
         List<OrderItem> orderItems = DataFactory.createOrderItems(orders, productIdAndPriceBookEntryIdMapped);
 

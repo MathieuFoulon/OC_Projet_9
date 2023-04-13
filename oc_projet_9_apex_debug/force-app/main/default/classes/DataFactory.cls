@@ -31,13 +31,21 @@ public with sharing class DataFactory {
     }
 
     public static Order createOrder(String accountId){
-        return new Order (AccountId = accountId, Pricebook2Id = Test.getStandardPricebookId(), Status = 'Draft', EffectiveDate = Date.today()+30);
+        return new Order (AccountId = accountId,
+            Pricebook2Id = Test.getStandardPricebookId(),
+            Status = 'Draft',
+            EffectiveDate = Date.today()+30
+        );
     }
 
     public static List<Order> createOrders (String accountId, Integer numberOfOrders){
         List<Order> ordersList = new List<Order>();
             for(Integer i=0; i < numberOfOrders; i++) {
-                Order order = new Order (AccountId = accountId, Pricebook2Id = Test.getStandardPricebookId(), Status = 'Draft', EffectiveDate = Date.today()+30);
+                Order order = new Order (AccountId = accountId,
+                    Pricebook2Id = Test.getStandardPricebookId(),
+                    Status = 'Draft',
+                    EffectiveDate = Date.today()+30);
+                    
                 ordersList.add(order);
             }
         return ordersList;
