@@ -9,10 +9,7 @@ public with sharing class UpdateAccountsAnnualRevenueBatch implements Database.B
      
     public void execute(Database.BatchableContext bc, List<Account> scope){    
         
-        List<AggregateResult> results = [SELECT SUM(TotalAmount) total, AccountId FROM Order 
-            WHERE AccountId  
-            IN :scope AND Status='Activated' 
-            GROUP BY AccountId ];
+        List<AggregateResult> results = OrderManager.getSumOfTotalAmountOfActivatedOrdersGroupedByAccounts(scope);
         
         
         List<Account> accountsToUpdate = new List<Account>();
@@ -28,12 +25,7 @@ public with sharing class UpdateAccountsAnnualRevenueBatch implements Database.B
         }
         
         if (accountsToUpdate.size() > 0){
-            try {
-                update accountsToUpdate;
-            } catch (Exception e) {
-                System.debug('-- ERROR -- : ' + e.getMessage());
-            }
-            
+            update accountsToUpdate;
         }
     }    
      

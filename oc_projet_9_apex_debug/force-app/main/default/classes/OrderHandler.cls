@@ -2,22 +2,16 @@ public with sharing class OrderHandler {
 
     public static void processAccountAnnualRevenue(List<Order> orders) {
 
-        set<Id> setAccountIds = new set<Id>();
+        Set<Id> setAccountIds = new Set<Id>();
 
         for (Order order : orders){
             setAccountIds.add(order.AccountId);
         }
 
-        List<Account> accounts = [SELECT Id, AnnualRevenue FROM Account 
-            WHERE Id 
-            IN :setAccountIds
-        ]; 
+        List<Account> accounts = AccountManager.getAccountsWithAnnualRevenue(setAccountIds);
 
-
-        List<Order> activatedOrders =  [SELECT Id, TotalAmount, AccountId, Status FROM Order 
-            WHERE AccountId 
-            IN :setAccountIds AND Status = 'Activated'
-        ];
+        List<Order> activatedOrders = OrderManager.getOrdersActivatedByAccountId(setAccountIds);
+        
 
         for(Account account: accounts) {
             account.AnnualRevenue = 0;
