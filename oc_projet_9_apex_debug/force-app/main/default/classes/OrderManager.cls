@@ -1,8 +1,8 @@
 public with sharing class OrderManager {
     public static List<Order> getOrdersActivatedByAccountId(Set<Id> accountsIds){
         return  [SELECT Id, TotalAmount, AccountId, Status FROM Order 
-        WHERE AccountId 
-        IN :accountsIds AND Status = 'Activated'
+            WHERE AccountId 
+            IN :accountsIds AND Status = 'Activated'
         ];
     }
 
