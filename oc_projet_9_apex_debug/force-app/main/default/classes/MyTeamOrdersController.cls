@@ -2,7 +2,8 @@ public without sharing class MyTeamOrdersController {
 
      public decimal sumOrders{
         get{
-			return (decimal)OrderManager.getSumOfTotalAmountOfActivatedOrders();
+            AggregateResult aggregateResult = OrderManager.getSumOfTotalAmountOfActivatedOrders();
+			return (decimal)aggregateResult.get('total');
 
         }
         set;

@@ -8,10 +8,10 @@ public with sharing class OrderManager {
 
     public static AggregateResult getSumOfTotalAmountOfActivatedOrders(){
         AggregateResult groupedResults = [SELECT SUM(TotalAmount) total FROM Order WHERE Status = 'Activated'];
-		return groupedResults.get('total');
+		return groupedResults;
     }
 
-    public static AggregateResult getSumOfTotalAmountOfActivatedOrdersGroupedByAccounts(List<Account> accounts){
+    public static List<AggregateResult> getSumOfTotalAmountOfActivatedOrdersGroupedByAccounts(List<Account> accounts){
         return [SELECT SUM(TotalAmount) total, AccountId FROM Order 
             WHERE AccountId  
             IN :accounts AND Status='Activated' 
